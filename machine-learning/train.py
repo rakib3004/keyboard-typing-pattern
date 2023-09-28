@@ -4,10 +4,10 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 
 # Load your dataset
-data = pd.read_csv('your_dataset.csv')
+data = pd.read_csv('finaldata.csv')
 
 # Split the dataset into features (X) and target labels (y)
-X = data.drop(columns=['Target'])
+X = data.drop(columns=['Target','user'])
 y = data['Target']
 
 # Split the data into training and testing sets
