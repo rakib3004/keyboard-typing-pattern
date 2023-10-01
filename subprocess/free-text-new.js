@@ -167,9 +167,26 @@ async function process() {
     // await register(email, password);
     let pattern = getPattern(email);
     await saveToFile(pattern.join(","));
-    // window.location.reload();
-}
+    await verifiedUser();
+    window.location.reload();
 
+}
+async function verifiedUser(){
+
+    fetch('/run_script', { method: 'POST' })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Display the result in the "result" div
+            document.getElementById('result').textContent = 'Result: ' + data.result;
+        } else {
+            alert('Error: ' + data.message);
+        }
+    })
+    .catch(error => {
+        alert('An error occurred: ' + error.message);
+    });
+}
 async function saveToFile(data) {
     let existingData;
     try {
