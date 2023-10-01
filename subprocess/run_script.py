@@ -2,7 +2,7 @@
 
 from flask import Flask, request, jsonify
 import subprocess
-
+import json
 app = Flask(__name__)
 
 @app.route('/run_script', methods=['POST'])
@@ -16,13 +16,15 @@ def run_script():
         
         if 'accuracy' in result_data:
             accuracy = result_data['accuracy']
+            print('accuracy got it ')
         else:
             accuracy = None
-
+            print('nothing')
         # Return the result as JSON
-        return jsonify({'success': True, 'accuracy': accuracy})
+        print('accuracy')
+        return jsonify({'success': True, 'result': accuracy})
     except Exception as e:
-        return jsonify({'success': False, 'message': str(e)})
+        return jsonify({'success': False, 'result': str(e)})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)

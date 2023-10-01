@@ -173,19 +173,13 @@ async function process() {
 }
 async function verifiedUser(){
 
-    fetch('/run_script', { method: 'POST' })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            // Display the result in the "result" div
-            document.getElementById('result').textContent = 'Result: ' + data.result;
-        } else {
-            alert('Error: ' + data.message);
-        }
-    })
-    .catch(error => {
-        alert('An error occurred: ' + error.message);
+    
+    const response = await fetch("http://localhost:5000/run_script", {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
     });
+
+    alert(response);
 }
 async function saveToFile(data) {
     let existingData;

@@ -27,5 +27,5 @@ y_pred = (y_pred_prob > threshold).astype(int)
 # Evaluate the model
 accuracy = accuracy_score(y_test, y_pred)
 print(f'Accuracy: {accuracy * 100:.2f}%')
-
+print(json.dumps({"accuracy": accuracy}))
 # You can now use this trained model to recognize keyboard typing patterns for any person.
