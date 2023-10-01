@@ -114,7 +114,6 @@ function updateIntermediateArray(key1, key2, value, prefix) {
 function getPattern(email) {
     // need change here
     let processed = [];
-    let processed2 = [email];
     for (let index in pressed) {
         if (pressed[index].key != released[index].key) {
             console.log(`Noted (${pressed[index].key}-${released[index].key})`)
@@ -159,15 +158,15 @@ async function process() {
         alert("Confirm password not match");
         return;
     }
-    // if (pressed.length != released.length) {
-    //     alert("Something not right");
-    //     return;
-    // }
+    if (pressed.length != released.length) {
+        alert("Something not right");
+        return;
+    }
     let email = document.getElementById("reg-input-email").value;
     await register(email, password);
-    //let pattern = getPattern(email);
-    //await saveToFile(pattern.join(","));
-    // window.location.reload();
+    let pattern = getPattern(email);
+    await saveToFile(pattern.join(","));
+    window.location.reload();
 }
 
 async function saveToFile(data) {
