@@ -160,7 +160,7 @@ async function process() {
         return;
     }
     if (pressed.length != released.length) {
-        alert("Something not right");
+        alert("May be You give backspace while typing");
         return;
     }
     let email = document.getElementById("reg-input-email").value;
@@ -168,18 +168,33 @@ async function process() {
     let pattern = getPattern(email);
     await saveToFile(pattern.join(","));
     await verifiedUser();
-    window.location.reload();
+    //window.location.reload();
 
 }
 async function verifiedUser(){
 
-    
-    const response = await fetch("http://localhost:5000/run_script", {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-    });
+ 
+    try {
+        const response = await fetch('http://127.0.0.1:5000/train', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
 
-    alert(response);
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+
+        // Display the result on the HTML page
+        alert(JSON.stringify(data));
+        console.log(data);
+    } catch (error) {
+        console.error('Error:', error);
+    }
+
 }
 async function saveToFile(data) {
     let existingData;

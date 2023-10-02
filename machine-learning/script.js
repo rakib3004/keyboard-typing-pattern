@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         // Send the input data to the Python script
-        fetch('run_python_script.py', {
+        fetch('/train', {
             method: 'POST',
             body: JSON.stringify(inputData),
             headers: {
