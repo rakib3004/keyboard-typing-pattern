@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>Registration Form</title>
+    
 </head>
 
 <body>
@@ -25,17 +26,24 @@
         <input type="password" name="reg-input-cpass" id="reg-input-cpass">
     </div>
     <p>For added security, please type the following sentence in the textbox below and click "Continue"</p>
-    <p>a student of machine learning is clearly related to computational statistics, which focuses on making predicts
-        using computers but not at all machine learning is statistical learning</p>
+    <p>a student of machine learning is clearly related to computational statistics</p>
+
     <input type="text" name="reg-text-input" id="reg-text-input" onkeyup="keyUpFunc(event)"
         onkeydown="keyDownFunc(event)" placeholder="Type text here">
     <div></button><button onclick="process()">Continue</button></div>
-    <!-- <a href="login.html">Go to login page</a>    <script src="script.js"></script> -->
-    <a href="login.html">Go to login page</a>    <script src="free-text-new.js"></script>
-    <!-- <a href="login.html">Go to login page</a>    <script src="free-text-rec.js"></script> -->
+    <a href="login.html">Go to login page</a>
+    <script src="free-text-new.js"></script>
 
-    <!-- <a href="login.html">Go to login page</a>    <script src="free-text.js"></script> -->
+    <span>
+        <p id="title">User Type:</p>
+        <b>
+            <p id="user"></p>
+        </b>
+    </span>
 
+
+    </span>
+</form>
 </body>
 
 </html>

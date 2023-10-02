@@ -173,7 +173,8 @@ async function process() {
 }
 async function verifiedUser(){
 
- 
+    const userElement = document.getElementById('user');
+
     try {
         const response = await fetch('http://127.0.0.1:5000/train', {
             method: 'POST',
@@ -188,8 +189,19 @@ async function verifiedUser(){
 
         const data = await response.json();
 
-        // Display the result on the HTML page
+
         alert(JSON.stringify(data));
+        const jsonData = JSON.stringify(data);
+        const parsedData = JSON.parse(jsonData);
+        const resultValue = parsedData.result * 100;
+        if(resultValue>50){
+            userElement.textContent = "Geniune";
+        }
+        else{
+
+            userElement.textContent = "Imposter"
+        }
+
         console.log(data);
     } catch (error) {
         console.error('Error:', error);
