@@ -167,7 +167,7 @@ async function process() {
     // await register(email, password);
     let pattern = getPattern(email);
     await saveToFile(pattern.join(","));
-    await verifiedUser();
+    //await verifiedUser();
     //window.location.reload();
 
 }
@@ -198,7 +198,6 @@ async function verifiedUser(){
             userElement.textContent = "Geniune";
         }
         else{
-
             userElement.textContent = "Imposter"
         }
 
