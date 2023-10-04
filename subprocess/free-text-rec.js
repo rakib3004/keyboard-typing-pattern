@@ -146,25 +146,46 @@ function getPattern(email) {
 }
 
 async function process() {
-    let password = document.getElementById("recover-text-input").value;
-    let confirm = document.getElementById("recover-text-input").value;
-    if (password < 3) {
-        alert("Password is too short");
-        return;
+    await verifiedUser();
+
+}
+
+async function verifiedUser(){
+
+    const userElement = document.getElementById('user');
+
+    try {
+        const response = await fetch('http://127.0.0.1:5000/train', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+
+
+        alert(JSON.stringify(data));
+        const jsonData = JSON.stringify(data);
+        const parsedData = JSON.parse(jsonData);
+        const resultValue = parsedData.result * 100;
+        if(resultValue>50){
+            userElement.textContent = "Geniune";
+        }
+        else{
+
+            userElement.textContent = "Imposter"
+        }
+
+        console.log(data);
+    } catch (error) {
+        console.error('Error:', error);
     }
-    if (password != confirm) {
-        alert("Confirm password not match");
-        return;
-    }
-    if (pressed.length != released.length) {
-        alert("Something not right");
-        return;
-    }
-    let email = document.getElementById("recover-input-email").value;
-    await register(email, password);
-    let pattern = getPattern(email);
-    await saveToFile(pattern.join(","));
-    // window.location.reload();
+
 }
 
 async function saveToFile(data) {
