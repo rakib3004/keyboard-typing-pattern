@@ -29,13 +29,14 @@ function getKey(event) {
     return event.key.toLowerCase();
 }
 
-function keyUpFunc(event) {
+async function keyUpFunc(event) {
     let key = getKey(event);
     if (escapable.includes(key)) return;
     if (key == "backspace") {
         released.pop();
         return;
     }
+    if (key != "enter") {
     released.push({ key, time: Date.now() });
     // console.log(`Released ${key} on ${released[released.length - 1].time - startOn} ms`);
     if (released.length > 1) {
@@ -44,9 +45,11 @@ function keyUpFunc(event) {
         let currKey = released[released.length - 1].key;
         // console.log(`${prevKey} and ${currKey} up up time ${UUtime} ms`);
     }
-    if (key == "enter") {
-        recovery();
-    }
+}
+
+else {
+    await process();
+}
 }
 
 function keyDownFunc(event) {
@@ -123,7 +126,7 @@ function getPattern(email) {
         let releaseTime = (released[index].time - startOn) / 1000.0;
         processed.push({ key: properChar(pressed[index].key), pressTime, releaseTime });
     }
-    console.log(processed);
+
     for (let i = 1; i < processed.length; i++) {
         current = processed[i - 1];
         next = processed[i];
@@ -134,27 +137,38 @@ function getPattern(email) {
             updateIntermediateArray(next.key, next.key, next.releaseTime - next.pressTime, "H");
         }
     }
-    console.log(tempStore);
+    console.log('-----temp----store--------',tempStore);
+
     let values = [];
+    let request_values = {};
     for (attrName of attributes) {
         if (tempStore[attrName]) {
             values.push(tempStore[attrName].finalValue);
+            request_values[attrName]=tempStore[attrName].finalValue;
+
         }
-        else { values.push(0); }
+        
+        else { values.push(0); 
+            request_values[attrName]=0;
+        }
     }
+    console.log('expected output -----------', request_values)
     return [email, ...values];
 }
 
 async function process() {
     let email = document.getElementById("recover-text-input").value;
     let pattern = getPattern(email);
-    await processData(pattern);
+    console.log(pattern)
+    await processData(pattern.join(","));
     await verifiedUser();
 
 }
 
 async function processData(data) {
-    console.log(data)
+    console.log(data);
+new_data = attributes.join(",") + "\n"+ + data + "\n";
+console.log('----key-------data------',new_data);
 }
 
 async function verifiedUser(){
@@ -188,7 +202,6 @@ async function verifiedUser(){
             userElement.textContent = "Imposter"
         }
 
-        console.log(data);
     } catch (error) {
         console.error('Error:', error);
     }
@@ -244,7 +257,6 @@ async function register(email, password) {
         body: JSON.stringify(body)
     });
     let resp_json = await resp.json();
-    console.log(resp_json);
     alert(resp_json.status);
     return resp_json;
 }
@@ -257,7 +269,6 @@ async function login(email, password) {
         body: JSON.stringify(body)
     });
     let resp_json = await resp.json();
-    console.log(resp_json);
     if (resp_json.status === "success") {
         // go to logged in page
     }
@@ -268,7 +279,6 @@ async function login(email, password) {
 async function recovery() {
     let email = document.getElementById("recover-input-email").value;
     let pattern = getPattern(email);
-    console.log(pattern);
     let body = { email, pattern };
     let resp = await fetch("http://localhost:5000/recovery", {
         method: 'POST',
@@ -276,7 +286,6 @@ async function recovery() {
         body: JSON.stringify(body)
     });
     let resp_json = await resp.json();
-    console.log(resp_json);
     if (resp_json.status === "success") {
         // go to logged in page
     }
