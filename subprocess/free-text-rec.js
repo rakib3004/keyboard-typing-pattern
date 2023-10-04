@@ -159,7 +159,7 @@ function getPattern(email) {
 for (let [key, value] of request_values) {
     request_values_object[key] = value;
 }
-
+request_values_object['Unnamed: 1486']=0;
     console.log('expected output -----------', request_values_object)
     return request_values_object;
 }
