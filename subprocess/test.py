@@ -1,9 +1,16 @@
-import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score
 
-single_data_point = {'H.a': 0, 'DD.a.a': 0.13475, 'UD.a.a': 0, 'DD.a.b': 0, 'UD.a.b': 0.0, 'DD.a.c': 0.0, 'UD.a.c': 0.167, 'DD.a.d': 0.003, 'UD.a.d': 0, 'DD.a.e': 0, 'UD.a.e': 0, 'DD.a.f': 0, 'UD.a.f': 0, 'DD.a.g': 0, 'UD.a.g': 0, 'DD.a.h': 0, 'UD.a.h': 0, 'DD.a.i': 0, 'UD.a.i': 0.0, 'DD.a.j': 0.0, 'UD.a.j': 0, 'DD.a.k': 0, 'UD.a.k': 0, 'DD.a.l': 0, 'UD.a.l': 0.01, 'DD.a.m': 0.005, 'UD.a.m': 0, 'DD.a.n': 0, 'UD.a.n': 0, 'DD.a.o': 0, 'UD.a.o': 0, 'DD.a.p': 0, 'UD.a.p': 0.0, 'DD.a.q': 0.0, 'UD.a.q': 0, 'DD.a.r': 0, 'UD.a.r': 0.163, 'DD.a.s': 0.07, 'UD.a.s': 0.0, 'DD.a.t': 0.0, 'UD.a.t': 0.525666667, 'DD.a.u': 0.326333333, 'UD.a.u': 0, 'DD.a.v': 0, 'UD.a.v': 0.0, 'DD.a.w': 0.0, 'UD.a.w': 0, 'DD.a.x': 0, 'UD.a.x': 0, 'DD.a.y': 0, 'UD.a.y': 
+
+
+
+import pandas as pd
+from sklearn.ensemble import RandomForestClassifier
+
+# Load your trained model (you should replace 'your_model.pkl' with the actual path to your trained model file)
+model = RandomForestClassifier()
+model.load('typing_pattern.pkl')
+
+# Collect input values from the user (you should replace these with your actual feature values)
+user_input = {'H.a': 0, 'DD.a.a': 0.13475, 'UD.a.a': 0, 'DD.a.b': 0, 'UD.a.b': 0.0, 'DD.a.c': 0.0, 'UD.a.c': 0.167, 'DD.a.d': 0.003, 'UD.a.d': 0, 'DD.a.e': 0, 'UD.a.e': 0, 'DD.a.f': 0, 'UD.a.f': 0, 'DD.a.g': 0, 'UD.a.g': 0, 'DD.a.h': 0, 'UD.a.h': 0, 'DD.a.i': 0, 'UD.a.i': 0.0, 'DD.a.j': 0.0, 'UD.a.j': 0, 'DD.a.k': 0, 'UD.a.k': 0, 'DD.a.l': 0, 'UD.a.l': 0.01, 'DD.a.m': 0.005, 'UD.a.m': 0, 'DD.a.n': 0, 'UD.a.n': 0, 'DD.a.o': 0, 'UD.a.o': 0, 'DD.a.p': 0, 'UD.a.p': 0.0, 'DD.a.q': 0.0, 'UD.a.q': 0, 'DD.a.r': 0, 'UD.a.r': 0.163, 'DD.a.s': 0.07, 'UD.a.s': 0.0, 'DD.a.t': 0.0, 'UD.a.t': 0.525666667, 'DD.a.u': 0.326333333, 'UD.a.u': 0, 'DD.a.v': 0, 'UD.a.v': 0.0, 'DD.a.w': 0.0, 'UD.a.w': 0, 'DD.a.x': 0, 'UD.a.x': 0, 'DD.a.y': 0, 'UD.a.y': 
 0, 'DD.a.z': 0, 'UD.a.z': 0, 'DD.a.space': 0, 'UD.a.space': 1.124, 'H.b': 0.999, 'DD.b.a': 0.0, 'UD.b.a': 0, 'DD.b.b': 0, 'UD.b.b': 0, 'DD.b.c': 0, 'UD.b.c': 0, 'DD.b.d': 0, 'UD.b.d': 0, 'DD.b.e': 0, 'UD.b.e': 0, 'DD.b.f': 0, 'UD.b.f': 0, 'DD.b.g': 0, 'UD.b.g': 0, 'DD.b.h': 0, 'UD.b.h': 0, 'DD.b.i': 0, 'UD.b.i': 0, 'DD.b.j': 0, 'UD.b.j': 0, 'DD.b.k': 0, 'UD.b.k': 0, 'DD.b.l': 0, 'UD.b.l': 0.0, 'DD.b.m': 0.0, 'UD.b.m': 0, 'DD.b.n': 0, 'UD.b.n': 0, 'DD.b.o': 0, 'UD.b.o': 0, 'DD.b.p': 0, 'UD.b.p': 0, 'DD.b.q': 0, 'UD.b.q': 0, 'DD.b.r': 0, 'UD.b.r': 0, 'DD.b.s': 0, 'UD.b.s': 0, 'DD.b.t': 0, 'UD.b.t': 0, 'DD.b.u': 0, 'UD.b.u': 0, 'DD.b.v': 0, 'UD.b.v': 0, 'DD.b.w': 0, 'UD.b.w': 0, 'DD.b.x': 0, 'UD.b.x': 0, 'DD.b.y': 0, 'UD.b.y': 0, 'DD.b.z': 0, 'UD.b.z': 0, 'DD.b.space': 0, 'UD.b.space': 0, 'H.c': 0, 'DD.c.a': 0.04825, 'UD.c.a': 0, 'DD.c.b': 0, 'UD.c.b': 0, 'DD.c.c': 0, 'UD.c.c': 0.0, 'DD.c.d': 0.0, 'UD.c.d': 0, 'DD.c.e': 0, 'UD.c.e': 0, 'DD.c.f': 0, 'UD.c.f': 0, 'DD.c.g': 0, 'UD.c.g': 0, 'DD.c.h': 0, 'UD.c.h': 0.001, 'DD.c.i': 0.0, 'UD.c.i': 0.0, 'DD.c.j': 0.0, 'UD.c.j': 0, 'DD.c.k': 0, 'UD.c.k': 0, 'DD.c.l': 0, 'UD.c.l': 0.248, 'DD.c.m': 0.184, 'UD.c.m': 0, 'DD.c.n': 0, 'UD.c.n': 0, 'DD.c.o': 0, 'UD.c.o': 0.132, 'DD.c.p': 0.131, 'UD.c.p': 0, 'DD.c.q': 0, 'UD.c.q': 0, 'DD.c.r': 0, 'UD.c.r': 0, 'DD.c.s': 0, 'UD.c.s': 0.189, 'DD.c.t': 0.062, 'UD.c.t': 0.0, 'DD.c.u': 0.0, 'UD.c.u': 0, 'DD.c.v': 0, 'UD.c.v': 0, 'DD.c.w': 0, 'UD.c.w': 0, 'DD.c.x': 0, 'UD.c.x': 0, 'DD.c.y': 0, 'UD.c.y': 0, 'DD.c.z': 0, 'UD.c.z': 0, 'DD.c.space': 0, 'UD.c.space': 0, 'H.d': 0, 'DD.d.a': 0.2855, 'UD.d.a': 0, 'DD.d.b': 0, 'UD.d.b': 0, 'DD.d.c': 0, 'UD.d.c': 0, 'DD.d.d': 0, 'UD.d.d': 0, 'DD.d.e': 
 0, 'UD.d.e': 0.575, 'DD.d.f': 0.005, 'UD.d.f': 0, 'DD.d.g': 0, 'UD.d.g': 0, 'DD.d.h': 0, 'UD.d.h': 0, 'DD.d.i': 0, 'UD.d.i': 0.0, 'DD.d.j': 0.0, 'UD.d.j': 0, 'DD.d.k': 0, 'UD.d.k': 0, 'DD.d.l': 0, 'UD.d.l': 0, 'DD.d.m': 0, 'UD.d.m': 0, 'DD.d.n': 0, 'UD.d.n': 0, 'DD.d.o': 0, 'UD.d.o': 0, 'DD.d.p': 0, 'UD.d.p': 0, 'DD.d.q': 0, 'UD.d.q': 0, 'DD.d.r': 0, 'UD.d.r': 
 0, 'DD.d.s': 0, 'UD.d.s': 0, 'DD.d.t': 0, 'UD.d.t': 0, 'DD.d.u': 0, 'UD.d.u': 0, 'DD.d.v': 0, 'UD.d.v': 0, 'DD.d.w': 0, 'UD.d.w': 0, 'DD.d.x': 0, 'UD.d.x': 0, 'DD.d.y': 0, 'UD.d.y': 0, 'DD.d.z': 0, 'UD.d.z': 0, 'DD.d.space': 0, 'UD.d.space': 
@@ -25,28 +32,19 @@ single_data_point = {'H.a': 0, 'DD.a.a': 0.13475, 'UD.a.a': 0, 'DD.a.b': 0, 'UD.
 0, 'UD.x.x': 0, 'DD.x.y': 0, 'UD.x.y': 0, 'DD.x.z': 0, 'UD.x.z': 0, 'DD.x.space': 0, 'UD.x.space': 0, 'H.y': 0, 'DD.y.a': 0.119, 'UD.y.a': 0, 'DD.y.b': 0, 'UD.y.b': 0, 'DD.y.c': 0, 'UD.y.c': 0, 'DD.y.d': 0, 'UD.y.d': 0, 'DD.y.e': 0, 'UD.y.e': 0.0, 'DD.y.f': 0.0, 'UD.y.f': 0, 'DD.y.g': 0, 'UD.y.g': 0, 'DD.y.h': 0, 'UD.y.h': 0, 'DD.y.i': 0, 'UD.y.i': 0, 'DD.y.j': 0, 'UD.y.j': 0, 'DD.y.k': 0, 'UD.y.k': 0, 'DD.y.l': 0, 'UD.y.l': 0, 'DD.y.m': 0, 'UD.y.m': 0, 'DD.y.n': 0, 'UD.y.n': 0, 
 'DD.y.o': 0, 'UD.y.o': 0, 'DD.y.p': 0, 'UD.y.p': 0, 'DD.y.q': 0, 'UD.y.q': 0, 'DD.y.r': 0, 'UD.y.r': 0, 'DD.y.s': 0, 'UD.y.s': 0, 'DD.y.t': 0, 'UD.y.t': 0, 'DD.y.u': 0, 'UD.y.u': 0, 'DD.y.v': 0, 'UD.y.v': 0, 'DD.y.w': 0, 'UD.y.w': 0, 'DD.y.x': 0, 'UD.y.x': 0, 'DD.y.y': 0, 'UD.y.y': 0, 'DD.y.z': 0, 'UD.y.z': 0, 'DD.y.space': 0, 'UD.y.space': 0.267, 'H.z': 0.148, 'DD.z.a': 0, 'UD.z.a': 0, 'DD.z.b': 0, 'UD.z.b': 0, 'DD.z.c': 0, 'UD.z.c': 0, 'DD.z.d': 0, 'UD.z.d': 0, 'DD.z.e': 0, 'UD.z.e': 0, 'DD.z.f': 0, 'UD.z.f': 0, 'DD.z.g': 0, 'UD.z.g': 0, 'DD.z.h': 0, 'UD.z.h': 0, 'DD.z.i': 0, 'UD.z.i': 0, 'DD.z.j': 0, 'UD.z.j': 0, 'DD.z.k': 0, 'UD.z.k': 0, 'DD.z.l': 0, 'UD.z.l': 0, 'DD.z.m': 0, 'UD.z.m': 0, 'DD.z.n': 0, 'UD.z.n': 0, 'DD.z.o': 0, 'UD.z.o': 0, 'DD.z.p': 0, 'UD.z.p': 0, 'DD.z.q': 0, 'UD.z.q': 0, 'DD.z.r': 0, 'UD.z.r': 0, 'DD.z.s': 0, 'UD.z.s': 0, 'DD.z.t': 0, 'UD.z.t': 0, 'DD.z.u': 0, 'UD.z.u': 0, 'DD.z.v': 0, 'UD.z.v': 0, 'DD.z.w': 0, 'UD.z.w': 0, 'DD.z.x': 0, 'UD.z.x': 0, 'DD.z.y': 0, 'UD.z.y': 0, 'DD.z.z': 0, 'UD.z.z': 0, 'DD.z.space': 0, 'UD.z.space': 0, 'H.space': 0, 'DD.space.a': 0.3118, 'UD.space.a': 0.0, 'DD.space.b': 0.0, 'UD.space.b': 0, 'DD.space.c': 0, 'UD.space.c': 0.597, 'DD.space.d': 0.501, 'UD.space.d': 0.0, 'DD.space.e': 0.0, 'UD.space.e': 0.0, 'DD.space.f': 0.0, 'UD.space.f': 0.0, 'DD.space.g': 0.0, 'UD.space.g': 0, 'DD.space.h': 0, 'UD.space.h': 0, 'DD.space.i': 0, 'UD.space.i': 0.002, 'DD.space.j': 0.0, 'UD.space.j': 0, 'DD.space.k': 0, 'UD.space.k': 0, 'DD.space.l': 0, 'UD.space.l': 1.917, 'DD.space.m': 0.001, 'UD.space.m': 0.688, 'DD.space.n': 0.01, 'UD.space.n': 0.0, 'DD.space.o': 0.0, 'UD.space.o': 0.001, 'DD.space.p': 0.0, 'UD.space.p': 0.0, 
 'DD.space.q': 0.0, 'UD.space.q': 0, 'DD.space.r': 0, 'UD.space.r': 0.294, 'DD.space.s': 0.191, 'UD.space.s': 0.348, 'DD.space.t': 0.293, 'UD.space.t': 0.178, 'DD.space.u': 0.062, 'UD.space.u': 0, 'DD.space.v': 0, 'UD.space.v': 0.0, 'DD.space.w': 0.0, 'UD.space.w': 0.0, 'DD.space.x': 0.0, 'UD.space.x': 0, 'DD.space.y': 0, 'UD.space.y': 0, 'DD.space.z': 0, 'UD.space.z': 0, 'DD.space.space': 0, 'UD.space.space': 0.0, 'Unnamed: 1486': 0.0, 'Target': 0}
-single_data_df = pd.DataFrame([single_data_point])
 
-data = pd.read_csv('pattern.csv')
 
-X = data.drop(columns=['Target','user'])
-y = data['Target']
+# Create a DataFrame with the user's input
+user_data = pd.DataFrame([user_input])
 
-# Split the data into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+# Use the trained model to make predictions
+prediction = model.predict(user_data)
 
-# Train a machine learning model (Random Forest Classifier in this example)
-model = RandomForestClassifier(n_estimators=100, random_state=42)
-model.fit(X_train, y_train)
-# Make a prediction for the single data point
-single_data_pred_prob = model.predict_proba(single_data_df)[:, 1]  # Probability of being the positive class
-
-print(single_data_pred_prob)
-threshold = 0.5
-prediction = (single_data_pred_prob > threshold).astype(int)
-
-# Check the prediction
-if prediction == 1:
-    print("The prediction is above the threshold (greater than 0.5).")
+# Determine the result based on the prediction
+if prediction[0] == 1:
+    result = "Genuine User"
 else:
-    print("The prediction is below the threshold (less than or equal to 0.5).")
+    result = "Imposter"
+
+# Display the result to the user
+print(f"The user is classified as: {result}")
