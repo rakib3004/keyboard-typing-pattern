@@ -17,7 +17,7 @@ single_data_point = {}
 # Iterate through the column names
 for column_name in column_names:
     # Get the first value from the column (iloc[0] selects the first row)
-    first_value = data[column_name].iloc[4]
+    first_value = data[column_name].iloc[13]
     
     # Add the pair to the dictionary
     single_data_point[column_name] = first_value

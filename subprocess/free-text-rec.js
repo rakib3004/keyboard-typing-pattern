@@ -146,8 +146,15 @@ function getPattern(email) {
 }
 
 async function process() {
+    let email = document.getElementById("recover-text-input").value;
+    let pattern = getPattern(email);
+    await processData(pattern);
     await verifiedUser();
 
+}
+
+async function processData(data) {
+    console.log(data)
 }
 
 async function verifiedUser(){

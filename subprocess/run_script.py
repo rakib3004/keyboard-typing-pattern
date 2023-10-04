@@ -11,13 +11,13 @@ CORS(app)
 def run_script():
     try:
 
-        result = subprocess.check_output(['python', 'train.py'], text=True)
+        result = subprocess.check_output(['python', 'test.py'], text=True)
         result_data = json.loads(result)
-        if 'accuracy' in result_data:
-            accuracy = result_data["accuracy"]
+        if 'result' in result_data:
+            result_value = result_data["result"]
         else:
-            accuracy = None
-        return jsonify({'success': True, 'result': accuracy})
+            result_value = None
+        return jsonify({'success': True, 'result': result_value})
     except Exception as e:
         return jsonify({'success': False, 'result': str(e)})
 

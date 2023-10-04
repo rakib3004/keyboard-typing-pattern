@@ -1,7 +1,3 @@
-
-
-
-
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 import joblib
@@ -9,14 +5,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 import json
 
-# data = pd.read_csv('pattern.csv')
-# X = data.drop(columns=['Target','user'])
-# y = data['Target']
-
-# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-# model = RandomForestClassifier(n_estimators=100, random_state=42)
-# model.fit(X_train, y_train)
 model = joblib.load('typing_pattern.pkl')
 
 
@@ -46,10 +34,5 @@ user_data = pd.DataFrame([user_input])
 
 prediction = model.predict(user_data)
 
-if prediction[0] == 1:
-    result = "Genuine User"
-else:
-    result = "Imposter"
-
-# Display the result to the user
-print(f"The user is classified as: {result}")
+result  = int(prediction[0])
+print(json.dumps({"result": result}))
