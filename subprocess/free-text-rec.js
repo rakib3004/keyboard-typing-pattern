@@ -140,38 +140,40 @@ function getPattern(email) {
     console.log('-----temp----store--------',tempStore);
 
     let values = [];
-    let request_values = {};
-    for (attrName of attributes) {
-        if (tempStore[attrName]) {
+    let request_values = new Map();
+        for (attrName of attributes) {
+            if(attrName==='user'){
+                continue;
+            }
+       else if (tempStore[attrName]) {
             values.push(tempStore[attrName].finalValue);
-            request_values[attrName]=tempStore[attrName].finalValue;
-
+            request_values.set(attrName, tempStore[attrName].finalValue); 
         }
         
         else { values.push(0); 
-            request_values[attrName]=0;
+            request_values.set(attrName, 0);
         }
     }
-    console.log('expected output -----------', request_values)
-    return [email, ...values];
+
+    let request_values_object = {};
+for (let [key, value] of request_values) {
+    request_values_object[key] = value;
+}
+
+    console.log('expected output -----------', request_values_object)
+    return request_values_object;
 }
 
 async function process() {
     let email = document.getElementById("recover-text-input").value;
-    let pattern = getPattern(email);
-    console.log(pattern)
-    await processData(pattern.join(","));
-    await verifiedUser();
+    let typing_pattern_data = getPattern(email);
+    
+    await verifiedUser(typing_pattern_data);
 
 }
 
-async function processData(data) {
-    console.log(data);
-new_data = attributes.join(",") + "\n"+ + data + "\n";
-console.log('----key-------data------',new_data);
-}
 
-async function verifiedUser(){
+async function verifiedUser(typing_pattern_data){
 
     const userElement = document.getElementById('user');
 
@@ -180,7 +182,8 @@ async function verifiedUser(){
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            body: JSON.stringify(typing_pattern_data)
         });
 
         if (!response.ok) {

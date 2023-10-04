@@ -10,7 +10,7 @@ CORS(app)
 @app.route('/train', methods=['POST'])
 def run_script():
     try:
-
+        
         result = subprocess.check_output(['python', 'test.py'], text=True)
         result_data = json.loads(result)
         if 'result' in result_data:
