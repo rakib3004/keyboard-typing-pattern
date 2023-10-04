@@ -4,7 +4,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 import json
 # Load your dataset
-data = pd.read_csv('finaldata.csv')
+data = pd.read_csv('pattern.csv')
 # Split the dataset into features (X) and target labels (y)
 X = data.drop(columns=['Target','user'])
 y = data['Target']
