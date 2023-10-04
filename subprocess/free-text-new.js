@@ -160,7 +160,7 @@ async function process() {
         return;
     }
     if (pressed.length != released.length) {
-        alert("May be You give backspace while typing");
+        alert("May be you give backspace while typing");
         return;
     }
     let email = document.getElementById("reg-input-email").value;

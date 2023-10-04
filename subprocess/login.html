@@ -7,6 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>Login Form</title>
+    <style>
+        button a {
+          text-decoration: none; /* Remove underline */
+          color: inherit; /* Inherit color from parent (button) */
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center content vertically */
+            justify-content: center; /* Center content horizontally */
+            margin: 0; /* Remove default margin */
+        }
+      </style>
 </head>
 
 <body>
@@ -20,7 +34,7 @@
         <input type="password" name="login-input-pass" id="login-input-pass">
     </div>
     <div>
-        <button>Forget Password?</button>
+        <button> <a href="recover.html">Forget Password?</a></button>
         <button
             onclick="login(
                 document.getElementById('login-input-email').value,
