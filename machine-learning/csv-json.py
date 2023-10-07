@@ -1,11 +1,12 @@
 import pandas as pd
 
 # Replace 'your_file.csv' with the actual path to your CSV file
-file_path = 'pattern.csv'
+file_path = 'registration.csv'
 
 # Read the CSV file into a DataFrame
 dataset = pd.read_csv(file_path)
-data = dataset.drop(columns=['user'])
+collection = dataset.drop(columns=['user'])
+data = collection.drop(columns=['Target'])
 
 
 # Get the column names (titles)
