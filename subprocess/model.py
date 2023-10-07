@@ -8,7 +8,8 @@ import joblib
 data = pd.read_csv('pattern.csv')
 X = data.drop(columns=['Target','user'])
 y = data['Target']
-
+for value in y.values:
+    print(value)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # Initialize and train the RandomForestClassifier model
