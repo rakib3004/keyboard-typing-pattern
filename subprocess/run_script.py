@@ -7,12 +7,12 @@ import json
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/train', methods=['POST'])
+@app.route('/pattern', methods=['POST'])
 def run_script():
     try:
         body = request.json
         user_input = json.dumps(body)
-        result = subprocess.check_output(['python', 'test.py',  user_input], text=True)
+        result = subprocess.check_output(['python', 'pattern.py',  user_input], text=True)
         result_data = json.loads(result)
         if 'result' in result_data:
             result_value = result_data["result"]
