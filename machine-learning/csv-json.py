@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Replace 'your_file.csv' with the actual path to your CSV file
-file_path = 'registration.csv'
+file_path = 'recover.csv'
 
 # Read the CSV file into a DataFrame
 dataset = pd.read_csv(file_path)
@@ -18,7 +18,7 @@ single_data_point = {}
 # Iterate through the column names
 for column_name in column_names:
     # Get the first value from the column (iloc[0] selects the first row)
-    first_value = data[column_name].iloc[1]
+    first_value = data[column_name].iloc[0]
     
     # Add the pair to the dictionary
     single_data_point[column_name] = first_value
