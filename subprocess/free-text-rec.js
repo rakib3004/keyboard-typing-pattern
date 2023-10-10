@@ -177,6 +177,8 @@ async function process() {
 async function verifiedUser(typing_pattern_data){
 
     const userElement = document.getElementById('user');
+    const errorElement = document.getElementById('error');
+
 
     try {
         const response = await fetch('http://127.0.0.1:5000/pattern', {
@@ -203,6 +205,8 @@ async function verifiedUser(typing_pattern_data){
         else{
 
             userElement.textContent = "Imposter"
+            errorElement.textContent = "Your keyboard typing pattern is not matched!"
+
         }
 
     } catch (error) {
