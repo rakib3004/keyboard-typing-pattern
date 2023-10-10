@@ -193,7 +193,6 @@ async function verifiedUser(typing_pattern_data){
         const data = await response.json();
 
 
-        alert(JSON.stringify(data));
         const jsonData = JSON.stringify(data);
         const parsedData = JSON.parse(jsonData);
         const resultValue = parsedData.result * 100;
