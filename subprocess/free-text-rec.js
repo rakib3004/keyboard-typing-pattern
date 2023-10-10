@@ -55,6 +55,7 @@ else {
 function keyDownFunc(event) {
     let key = getKey(event);
     if (escapable.includes(key)) return;
+    if (key == "enter") return;
     if (key == "backspace") {
         pressed.pop();
         return;

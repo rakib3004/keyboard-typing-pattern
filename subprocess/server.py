@@ -12,7 +12,7 @@ def run_script():
     try:
         body = request.json
         user_input = json.dumps(body)
-        result = subprocess.check_output(['python', 'main.py',  user_input], text=True)
+        result = subprocess.check_output(['python', 'model.py',  user_input], text=True)
         result_data = json.loads(result)
         if 'result' in result_data:
             result_value = result_data["result"]

@@ -5,7 +5,7 @@ from sklearn.metrics import accuracy_score
 import json
 import joblib
 
-data = pd.read_csv('dataset.csv')
+data = pd.read_csv('pattern.csv')
 X = data.drop(columns=['Target','user'])
 y = data['Target']
 for value in y.values:
