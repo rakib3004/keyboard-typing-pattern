@@ -7,7 +7,6 @@ import json
 import sys
 
 if __name__ == "__main__":
-    # Get the JSON string from the command-line arguments
     if len(sys.argv) >= 2:
             user_input_param = sys.argv[1]
             user_input = json.loads(user_input_param)
