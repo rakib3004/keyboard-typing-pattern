@@ -1,2 +1,7 @@
+flask
 Flask
 Flask-Cors
+scikit-learn
+pandas
+joblib
+jsonify
