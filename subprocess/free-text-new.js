@@ -164,7 +164,7 @@ async function process() {
         return;
     }
     let email = document.getElementById("reg-input-email").value;
-    // await register(email, password);
+    await register(email, password);
     let pattern = getPattern(email);
     await saveToFile(pattern.join(","));
     //await verifiedUser();

@@ -4,7 +4,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS  
 import subprocess
 import json
-from db import add_user, authenticate
+from database import add_user, authenticate
 
 app = Flask(__name__)
 CORS(app)
