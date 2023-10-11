@@ -23,5 +23,24 @@ def run_script():
         return jsonify({'success': False, 'result': str(e)})
 
 
+@app.route('/register', methods=['POST'])
+def register():
+    body = request.json
+    email, password = body['email'], body['password']
+    add_user(email, password)
+    return {
+        'status': 'success',
+    }
+
+@app.route('/login', methods=['POST'])
+def login():
+    body = request.json
+    email, password = body['email'], body['password']
+    status = authenticate(email, password)
+    return {
+        'status': status,
+    }
+
+
 if __name__ == '__main__':
     app.run(debug=False)
