@@ -271,19 +271,26 @@ async function register(email, password) {
 }
 
 async function login(email, password) {
-    await process(email);
-    // let body = { email, password };
-    // let resp = await fetch("http://localhost:5000/login", {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify(body)
-    // });
-    // let resp_json = await resp.json();
-    // if (resp_json.status === "success") {
-    //     // go to logged in page
-    // }
-    // alert(resp_json.status);
-    // return resp_json;
+    let body = { email, password };
+    let resp = await fetch("http://localhost:5000/login", {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+    });
+    let resp_json = await resp.json();
+    alert(resp_json.status);
+    if (resp_json.status === false) {
+        const messageElement = document.getElementById('message');
+        messageElement.textContent = "Password is incorrect."
+
+        // go to logged in page
+    }
+    else{
+        await process(email);
+        return resp_json;
+    }
+   
+
 }
 
 async function recovery() {

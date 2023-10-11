@@ -4,7 +4,15 @@ import json
 FILE_PATH = "user_data.json"
 
 
+def get_users():
+    try:
+        with open(FILE_PATH, "r") as fp:
+            data = json.load(fp)
+        return data
+    except:
+        return {}
 
+        
 def save_users(users):
     with open(FILE_PATH, "w") as fp:
         json.dump(users, fp)
