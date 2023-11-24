@@ -17,14 +17,16 @@
         }
         .image-container {
             display: inline-block;
-            margin: 10px;
+            margin-left: 30px;
+            margin-right: 30px;
             cursor: pointer;
         }
 
         .image-container img {
-            width: 280px; 
-            height: 240px; 
-            border: 1px solid #ccc; 
+            width: 120px; 
+            height: 100px; 
+            border: 6px solid #fff; 
+
         }
 
         .selected {
@@ -41,16 +43,9 @@
         <p>*E-mail</p>
         <input type="text" name="reg-input-email" id="reg-input-email">
     </div>
-    <div class="row">
-        <p>*Password</p>
-        <input type="password" name="reg-input-pass" id="reg-input-pass">
-    </div>
-    <div class="row">
-        <p>*Confirm Password</p>
-        <input type="password" name="reg-input-cpass" id="reg-input-cpass">
-    </div>
 
-    <p>Select 4 image in a sequence. Please remember the sequence. This sequence of image must need for login.</p>
+
+    <p>Select images (minimum 4) for graphical password.</p>
     <p id="image-select"></p>
     <div id="imageGrid">
         <div class="image-container" onclick="toggleSelection(this)">
@@ -129,23 +124,10 @@
             }
 
             if (selectedImages.length == 4){
-                document.getElementById("image-select").textContent = "You have selected 4 images, now type the text below and click continue.";
+                document.getElementById("image-select").textContent = "Type the text below and click continue.";
                 document.getElementById("image-select").style.color = "green";
             }
          
-            if (selectedImages.length > 4) {
-                // const removedImage = selectedImages.shift();
-                // const parsedUrl = new URL(removedImage);
-                // const pathname = parsedUrl.pathname;
-                // const filename = pathname.split('/').pop();
-
-                // const removedContainer = document.querySelector('img[src="./images/' + filename + '"]').parentNode;
-                // console.log(removedContainer);
-                // removedContainer.classList.remove("selected");
-                alert('You can\'t select more than 4 image. If sequence is wrong then refresh the page');
-
-            }
-
         }
     </script>
     <script src="free-text-new.js"></script>

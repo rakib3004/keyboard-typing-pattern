@@ -21,14 +21,15 @@
       }
       .image-container {
         display: inline-block;
-        margin: 10px;
+        margin-left: 30px;
+        margin-right: 30px;
         cursor: pointer;
       }
 
       .image-container img {
-        width: 280px;
-        height: 240px;
-        border: 1px solid #ccc;
+        width: 120px;
+        height: 100px;
+        border: 6px solid #fff;
       }
 
       .selected {
@@ -44,12 +45,12 @@
       <p>*E-mail</p>
       <input type="text" name="login-input-email" id="login-input-email" />
     </div>
-    <div class="row">
+    <!-- <div class="row">
       <p>*Password</p>
       <input type="password" name="login-input-pass" id="login-input-pass" />
-    </div>
+    </div> -->
 
-    <p>Please select 4 image in correct sequence.</p>
+    <p>Provide your graphical password</p>
     <p id="image-select"></p>
     <p id="forgot-button-suggesstion"></p>
 
@@ -164,32 +165,18 @@
         }
 
         if (selectedImages.length == 4) {
-        //   document.getElementById("image-select").textContent =
-        //     "Image sequence is correct! Now type the text below and click login.";
-        //   document.getElementById("image-select").style.color = "green";
-         
-            document.getElementById("image-select").textContent = "Image sequence is incorrect! Please select 4 image in correct sequence.";
-                            
-            document.getElementById("forgot-button-suggesstion").textContent = "If your forget the sequence then click on forgot password";
-            document.getElementById("forgot-button-suggesstion").style.color = "red";
-            document.getElementById("image-select").style.color = "red";
-                
+            document.getElementById("image-select").textContent =
+              "Correct Graphical Password. Now type the text below and click login.";
+            document.getElementById("image-select").style.color = "green";
+
+          // document.getElementById("image-select").textContent =
+          //   "Incorrect graphical password";
+          // document.getElementById("image-select").style.color = "red";
         }
 
-        if (selectedImages.length > 4) {
-          // const removedImage = selectedImages.shift();
-          // const parsedUrl = new URL(removedImage);
-          // const pathname = parsedUrl.pathname;
-          // const filename = pathname.split('/').pop();
-
-          // const removedContainer = document.querySelector('img[src="./images/' + filename + '"]').parentNode;
-          // console.log(removedContainer);
-          // removedContainer.classList.remove("selected");
-          alert(
-            "You can't select more than 4 image. If sequence is wrong then refresh the page"
-          );
+    
         }
-      }
+      
     </script>
     <script src="free-text-login.js"></script>
   </body>
