@@ -11,9 +11,24 @@
         body {
             display: flex;
             flex-direction: column;
-            align-items: center; /* Center content vertically */
-            justify-content: center; /* Center content horizontally */
-            margin: 0; /* Remove default margin */
+            align-items: center;
+            justify-content: center; 
+            margin: 0; 
+        }
+        .image-container {
+            display: inline-block;
+            margin: 10px;
+            cursor: pointer;
+        }
+
+        .image-container img {
+            width: 280px; 
+            height: 240px; 
+            border: 1px solid #ccc; 
+        }
+
+        .selected {
+            border: 6px solid green;
         }
     </style>
 </head>
@@ -34,6 +49,61 @@
         <p>*Confirm Password</p>
         <input type="password" name="reg-input-cpass" id="reg-input-cpass">
     </div>
+
+    <p>Select 4 image in a sequence. Please remember the sequence. This sequence of image must need for login.</p>
+    <p id="image-select"></p>
+    <div id="imageGrid">
+        <div class="image-container" onclick="toggleSelection(this)">
+            <img src="./images/machine-learning-1.png" alt="Image 1">
+        </div>
+        <div class="image-container" onclick="toggleSelection(this)">
+            <img src="./images/machine-learning-2.png" alt="Image 2">
+        </div>
+        <div class="image-container" onclick="toggleSelection(this)">
+            <img src="./images/machine-learning-3.png" alt="Image 3">
+        </div>
+        <div class="image-container" onclick="toggleSelection(this)">
+            <img src="./images/machine-learning-4.png" alt="Image 4">
+        </div>
+        <div class="image-container" onclick="toggleSelection(this)">
+            <img src="./images/machine-learning-5.png" alt="Image 1">
+        </div>
+        <div class="image-container" onclick="toggleSelection(this)">
+            <img src="./images/machine-learning-6.png" alt="Image 2">
+        </div>
+        <div class="image-container" onclick="toggleSelection(this)">
+            <img src="./images/machine-learning-7.png" alt="Image 3">
+        </div>
+        <div class="image-container" onclick="toggleSelection(this)">
+            <img src="./images/machine-learning-8.png" alt="Image 4">
+        </div>
+        <div class="image-container" onclick="toggleSelection(this)">
+            <img src="./images/machine-learning-9.png" alt="Image 1">
+        </div>
+        <div class="image-container" onclick="toggleSelection(this)">
+            <img src="./images/machine-learning-10.png" alt="Image 2">
+        </div>
+        <div class="image-container" onclick="toggleSelection(this)">
+            <img src="./images/machine-learning-11.png" alt="Image 3">
+        </div>
+        <div class="image-container" onclick="toggleSelection(this)">
+            <img src="./images/machine-learning-12.png" alt="Image 4">
+        </div>
+        <div class="image-container" onclick="toggleSelection(this)">
+            <img src="./images/machine-learning-13.png" alt="Image 1">
+        </div>
+        <div class="image-container" onclick="toggleSelection(this)">
+            <img src="./images/machine-learning-14.png" alt="Image 2">
+        </div>
+        <div class="image-container" onclick="toggleSelection(this)">
+            <img src="./images/machine-learning-15.png" alt="Image 3">
+        </div>
+        <div class="image-container" onclick="toggleSelection(this)">
+            <img src="./images/machine-learning-16.png" alt="Image 3">
+        </div>
+    </div>
+
+
     <p>For added security, please type the following sentence in the textbox below, press enter. click "Continue". </p>
     <p><b>"a student of machine learning is clearly related to computational statistics"</b></p>
 
@@ -41,6 +111,48 @@
         onkeydown="keyDownFunc(event)" placeholder="Type text here" style="width: 800px; height: 50px;">
     <div></button><button onclick="process()">Continue</button></div>
     <a href="login.html">Go to login page</a>
+
+    <script>
+        const selectedImages = [];
+        
+        function toggleSelection(element) {
+
+         
+            element.classList.toggle("selected");
+
+
+
+            const imageUrl = element.querySelector('img').src;
+
+            if (selectedImages.includes(imageUrl)) {
+                selectedImages = selectedImages.filter(item => item !== imageUrl);
+            } 
+            else{
+                selectedImages.push(imageUrl);
+
+            }
+
+            if (selectedImages.length == 4){
+                document.getElementById("image-select").textContent = "You have selected 4 images, now type the text below and click continue.";
+                document.getElementById("image-select").style.color = "green";
+            }
+         
+            if (selectedImages.length > 4) {
+                // const removedImage = selectedImages.shift();
+                // const parsedUrl = new URL(removedImage);
+                // const pathname = parsedUrl.pathname;
+
+                // const filename = pathname.split('/').pop();
+
+                // const removedContainer = document.querySelector('img[src="./images/' + filename + '"]').parentNode;
+                // console.log(removedContainer);
+                // removedContainer.classList.remove("selected");
+                alert('You can\'t select more than 4 image. If sequence is wrong then refresh the page');
+
+            }
+
+        }
+    </script>
     <script src="free-text-new.js"></script>
 
     </span>
