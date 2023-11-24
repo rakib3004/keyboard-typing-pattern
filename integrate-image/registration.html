@@ -7,6 +7,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>Registration Form</title>
+    <style>
+          .image-container {
+            display: inline-block;
+            margin: 10px;
+            cursor: pointer;
+        }
+
+        .image-container img {
+            width: 300px; 
+            height: 250px; 
+            border: 1px solid #ccc; 
+        }
+
+        .selected {
+            border: 2px solid blue;
+        }
+    </style>
 </head>
 
 <body>
@@ -24,14 +41,88 @@
         <p>*Confirm Password</p>
         <input type="password" name="reg-input-cpass" id="reg-input-cpass">
     </div>
+    <p>Select 4 image in a sequence, this sequence of image must need for login</p>
+
+    <div id="imageGrid">
+        <div class="image-container" onclick="toggleSelection(this)">
+            <img src="./images/machine-learning-1.png" alt="Image 1">
+        </div>
+        <div class="image-container" onclick="toggleSelection(this)">
+            <img src="./images/machine-learning-2.png" alt="Image 2">
+        </div>
+        <div class="image-container" onclick="toggleSelection(this)">
+            <img src="./images/machine-learning-3.png" alt="Image 3">
+        </div>
+        <div class="image-container" onclick="toggleSelection(this)">
+            <img src="./images/machine-learning-4.png" alt="Image 4">
+        </div>
+        <div class="image-container" onclick="toggleSelection(this)">
+            <img src="./images/machine-learning-5.png" alt="Image 1">
+        </div>
+        <div class="image-container" onclick="toggleSelection(this)">
+            <img src="./images/machine-learning-6.png" alt="Image 2">
+        </div>
+        <div class="image-container" onclick="toggleSelection(this)">
+            <img src="./images/machine-learning-7.png" alt="Image 3">
+        </div>
+        <div class="image-container" onclick="toggleSelection(this)">
+            <img src="./images/machine-learning-8.png" alt="Image 4">
+        </div>
+        <div class="image-container" onclick="toggleSelection(this)">
+            <img src="./images/machine-learning-9.png" alt="Image 1">
+        </div>
+        <div class="image-container" onclick="toggleSelection(this)">
+            <img src="./images/machine-learning-10.png" alt="Image 2">
+        </div>
+        <div class="image-container" onclick="toggleSelection(this)">
+            <img src="./images/machine-learning-11.png" alt="Image 3">
+        </div>
+        <div class="image-container" onclick="toggleSelection(this)">
+            <img src="./images/machine-learning-12.png" alt="Image 4">
+        </div>
+        <div class="image-container" onclick="toggleSelection(this)">
+            <img src="./images/machine-learning-13.png" alt="Image 1">
+        </div>
+        <div class="image-container" onclick="toggleSelection(this)">
+            <img src="./images/machine-learning-14.png" alt="Image 2">
+        </div>
+        <div class="image-container" onclick="toggleSelection(this)">
+            <img src="./images/machine-learning-15.png" alt="Image 3">
+        </div>
+    </div>
+
     <p>For added security, please type the following sentence in the textbox below and click "Continue"</p>
-    <p>.tieRoanl</p>
+    <p>a student of machine learning is clearly related to computational statistics</p>
     <textarea type="text" name="reg-text-input" id="reg-text-input"  rows="4" 
     cols="50" onkeyup="keyUpFunc(event)"
         onkeydown="keyDownFunc(event)" placeholder="Type text here">
         </textarea>
     <div><button onclick="process()">Continue</button></div>
     <a href="login.html">Go to login page</a>
+
+    <script>
+        var selectedImages = [];
+
+        function toggleSelection(element) {
+            element.classList.toggle("selected");
+
+            var imageUrl = element.querySelector('img').src;
+
+            if (selectedImages.includes(imageUrl)) {
+                selectedImages = selectedImages.filter(item => item !== imageUrl);
+            } else {
+                selectedImages.push(imageUrl);
+            }
+
+            if (selectedImages.length > 4) {
+                var removedImage = selectedImages.shift();
+                var removedContainer = document.querySelector('img[src="' + removedImage + '"]').parentNode;
+                removedContainer.classList.remove("selected");
+            }
+
+            console.log(selectedImages); // You can use this array for further processing or sending to the server
+        }
+    </script>
     <script src="free-text-new.js"></script>
   
 
