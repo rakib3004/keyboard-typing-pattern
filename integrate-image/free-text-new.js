@@ -38,12 +38,12 @@ async function keyUpFunc(event) {
     }
     if (key != "enter") {
         released.push({ key, time: Date.now() });
-         console.log(`Released ${key} on ${released[released.length - 1].time - startOn} ms`);
+        // console.log(`Released ${key} on ${released[released.length - 1].time - startOn} ms`);
         if (released.length > 1) {
             let UUtime = released[released.length - 1].time - released[released.length - 2].time;
             let prevKey = released[released.length - 2].key;
             let currKey = released[released.length - 1].key;
-           console.log(`${prevKey} and ${currKey} up up time ${UUtime} ms  :: key-up`);
+            // console.log(`${prevKey} and ${currKey} up up time ${UUtime} ms`);
         }
     }
     else {
@@ -68,13 +68,13 @@ function keyDownFunc(event) {
         let DDtime = pressed[pressed.length - 1].time - pressed[pressed.length - 2].time;
         let prevKey = pressed[pressed.length - 2].key;
         let currKey = pressed[pressed.length - 1].key;
-        console.log(`${prevKey} and ${currKey} down down time ${DDtime} ms :: key-down`);
+        // console.log(`${prevKey} and ${currKey} down down time ${DDtime} ms`);
     }
     if (released.length > 0) {
         let UDtime = pressed[pressed.length - 1].time - released[released.length - 1].time;
         let prevKey = released[released.length - 1].key;
         let currKey = pressed[pressed.length - 1].key;
-       console.log(`${prevKey} and ${currKey} up down time ${UDtime} ms`);
+        // console.log(`${prevKey} and ${currKey} up down time ${UDtime} ms`);
     }
 }
 
@@ -114,6 +114,7 @@ function updateIntermediateArray(key1, key2, value, prefix) {
 function getPattern(email) {
     // need change here
     let processed = [];
+    let processed2 = [email];
     for (let index in pressed) {
         if (pressed[index].key != released[index].key) {
             console.log(`Noted (${pressed[index].key}-${released[index].key})`)
@@ -159,16 +160,53 @@ async function process() {
         return;
     }
     if (pressed.length != released.length) {
-        alert("Something not right");
+        alert("May be you give backspace while typing");
         return;
     }
     let email = document.getElementById("reg-input-email").value;
     await register(email, password);
     let pattern = getPattern(email);
     await saveToFile(pattern.join(","));
-    window.location.reload();
-}
+    //await verifiedUser();
+    //window.location.reload();
 
+}
+async function verifiedUser(){
+
+    const userElement = document.getElementById('user');
+
+    try {
+        const response = await fetch('http://127.0.0.1:5000/pattern', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+
+
+        alert(JSON.stringify(data));
+        const jsonData = JSON.stringify(data);
+        const parsedData = JSON.parse(jsonData);
+        const resultValue = parsedData.result * 100;
+        if(resultValue>50){
+            userElement.textContent = "Geniune";
+        }
+        else{
+            userElement.textContent = "Imposter"
+        }
+
+        console.log(data);
+    } catch (error) {
+        console.error('Error:', error);
+    }
+
+}
 async function saveToFile(data) {
     let existingData;
     try {
@@ -233,7 +271,7 @@ async function login(email, password) {
     let resp_json = await resp.json();
     console.log(resp_json);
     if (resp_json.status === "success") {
-        window.location.href = "../typing-pattern-with-dnn/login.html";
+        // go to logged in page
     }
     alert(resp_json.status);
     return resp_json;

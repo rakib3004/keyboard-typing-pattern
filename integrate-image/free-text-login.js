@@ -29,13 +29,14 @@ function getKey(event) {
     return event.key.toLowerCase();
 }
 
-function keyUpFunc(event) {
+async function keyUpFunc(event) {
     let key = getKey(event);
     if (escapable.includes(key)) return;
     if (key == "backspace") {
         released.pop();
         return;
     }
+    if (key != "enter") {
     released.push({ key, time: Date.now() });
     // console.log(`Released ${key} on ${released[released.length - 1].time - startOn} ms`);
     if (released.length > 1) {
@@ -44,14 +45,17 @@ function keyUpFunc(event) {
         let currKey = released[released.length - 1].key;
         // console.log(`${prevKey} and ${currKey} up up time ${UUtime} ms`);
     }
-    if (key == "enter") {
-        process();
-    }
+}
+
+else {
+    await process();
+}
 }
 
 function keyDownFunc(event) {
     let key = getKey(event);
     if (escapable.includes(key)) return;
+    if (key == "enter") return;
     if (key == "backspace") {
         pressed.pop();
         return;
@@ -123,7 +127,7 @@ function getPattern(email) {
         let releaseTime = (released[index].time - startOn) / 1000.0;
         processed.push({ key: properChar(pressed[index].key), pressTime, releaseTime });
     }
-    console.log(processed);
+
     for (let i = 1; i < processed.length; i++) {
         current = processed[i - 1];
         next = processed[i];
@@ -134,37 +138,83 @@ function getPattern(email) {
             updateIntermediateArray(next.key, next.key, next.releaseTime - next.pressTime, "H");
         }
     }
-    console.log(tempStore);
+    console.log('-----temp----store--------',tempStore);
+
     let values = [];
-    for (attrName of attributes) {
-        if (tempStore[attrName]) {
+    let request_values = new Map();
+        for (attrName of attributes) {
+            if(attrName==='user'){
+                continue;
+            }
+       else if (tempStore[attrName]) {
             values.push(tempStore[attrName].finalValue);
+            request_values.set(attrName, tempStore[attrName].finalValue); 
         }
-        else { values.push(0); }
+        
+        else { values.push(0); 
+            request_values.set(attrName, 0);
+        }
     }
-    return [email, ...values];
+
+    let request_values_object = {};
+for (let [key, value] of request_values) {
+    request_values_object[key] = value;
+}
+request_values_object['Unnamed: 1486']=0;
+    console.log('expected output -----------', request_values_object)
+    return request_values_object;
 }
 
-async function process() {
-    let password = document.getElementById("reg-input-pass").value;
-    let confirm = document.getElementById("reg-input-cpass").value;
-    if (password < 3) {
-        alert("Password is too short");
-        return;
+async function process(email) {
+    // let email = document.getElementById("recover-text-input").value;
+    let typing_pattern_data = getPattern(email);
+    
+    await verifiedUser(typing_pattern_data);
+
+}
+
+
+async function verifiedUser(typing_pattern_data){
+
+    const userElement = document.getElementById('user');
+    const messageElement = document.getElementById('message');
+
+
+    try {
+        const response = await fetch('http://127.0.0.1:5000/pattern', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(typing_pattern_data)
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+
+
+        const jsonData = JSON.stringify(data);
+        const parsedData = JSON.parse(jsonData);
+        const resultValue = parsedData.result * 100;
+        if(resultValue>50){
+            userElement.textContent = "Geniune";
+            messageElement.textContent = "Your Pattern is matched! You can access it."
+
+        }
+        else{
+
+            userElement.textContent = "Imposter"
+            messageElement.textContent = "Your Pattern is not matched! Access Denied."
+
+        }
+
+    } catch (error) {
+        console.error('Error:', error);
     }
-    if (password != confirm) {
-        alert("Confirm password not match");
-        return;
-    }
-    if (pressed.length != released.length) {
-        alert("Something not right");
-        return;
-    }
-    let email = document.getElementById("reg-input-email").value;
-    // await register(email, password);
-    let pattern = getPattern(email);
-    await saveToFile(pattern.join(","));
-    // window.location.reload();
+
 }
 
 async function saveToFile(data) {
@@ -216,7 +266,6 @@ async function register(email, password) {
         body: JSON.stringify(body)
     });
     let resp_json = await resp.json();
-    console.log(resp_json);
     alert(resp_json.status);
     return resp_json;
 }
@@ -229,18 +278,24 @@ async function login(email, password) {
         body: JSON.stringify(body)
     });
     let resp_json = await resp.json();
-    console.log(resp_json);
-    if (resp_json.status === "success") {
+    alert(resp_json.status);
+    if (resp_json.status === false) {
+        const messageElement = document.getElementById('message');
+        messageElement.textContent = "Password is incorrect."
+
         // go to logged in page
     }
-    alert(resp_json.status);
-    return resp_json;
+    else{
+        await process(email);
+        return resp_json;
+    }
+   
+
 }
 
 async function recovery() {
     let email = document.getElementById("recover-input-email").value;
     let pattern = getPattern(email);
-    console.log(pattern);
     let body = { email, pattern };
     let resp = await fetch("http://localhost:5000/recovery", {
         method: 'POST',
@@ -248,7 +303,6 @@ async function recovery() {
         body: JSON.stringify(body)
     });
     let resp_json = await resp.json();
-    console.log(resp_json);
     if (resp_json.status === "success") {
         // go to logged in page
     }

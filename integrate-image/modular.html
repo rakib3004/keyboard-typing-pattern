@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Registration Form</title>
+    <style>
+          .image-container {
+            display: inline-block;
+            margin: 10px;
+            cursor: pointer;
+        }
+
+        .image-container img {
+            width: 280px; 
+            height: 240px; 
+            border: 1px solid #ccc; 
+        }
+
+        .selected {
+            border: 6px solid green;
+        }
+    </style>
+</head>
+
+<body>
+    <p class="header">USER REGISTRATION FORM</p>
+    <p>* Required</p>
+    <div class="row">
+        <p>*E-mail</p>
+        <input type="text" name="reg-input-email" id="reg-input-email">
+    </div>
+    <div class="row">
+        <p>*Password</p>
+        <input type="password" name="reg-input-pass" id="reg-input-pass">
+    </div>
+    <div class="row">
+        <p>*Confirm Password</p>
+        <input type="password" name="reg-input-cpass" id="reg-input-cpass">
+    </div>
+    <p>Select 4 image in a sequence, this sequence of image must need for login</p>
+    <p id="image-select"></p>
+    <div id="imageGrid">
+        <div class="image-container" onclick="toggleSelection(this)">
+            <img src="./images/machine-learning-1.png" alt="Image 1">
+        </div>
+        <div class="image-container" onclick="toggleSelection(this)">
+            <img src="./images/machine-learning-2.png" alt="Image 2">
+        </div>
+        <div class="image-container" onclick="toggleSelection(this)">
+            <img src="./images/machine-learning-3.png" alt="Image 3">
+        </div>
+        <div class="image-container" onclick="toggleSelection(this)">
+            <img src="./images/machine-learning-4.png" alt="Image 4">
+        </div>
+        <div class="image-container" onclick="toggleSelection(this)">
+            <img src="./images/machine-learning-5.png" alt="Image 1">
+        </div>
+        <div class="image-container" onclick="toggleSelection(this)">
+            <img src="./images/machine-learning-6.png" alt="Image 2">
+        </div>
+        <div class="image-container" onclick="toggleSelection(this)">
+            <img src="./images/machine-learning-7.png" alt="Image 3">
+        </div>
+        <div class="image-container" onclick="toggleSelection(this)">
+            <img src="./images/machine-learning-8.png" alt="Image 4">
+        </div>
+        <div class="image-container" onclick="toggleSelection(this)">
+            <img src="./images/machine-learning-9.png" alt="Image 1">
+        </div>
+        <div class="image-container" onclick="toggleSelection(this)">
+            <img src="./images/machine-learning-10.png" alt="Image 2">
+        </div>
+        <div class="image-container" onclick="toggleSelection(this)">
+            <img src="./images/machine-learning-11.png" alt="Image 3">
+        </div>
+        <div class="image-container" onclick="toggleSelection(this)">
+            <img src="./images/machine-learning-12.png" alt="Image 4">
+        </div>
+        <div class="image-container" onclick="toggleSelection(this)">
+            <img src="./images/machine-learning-13.png" alt="Image 1">
+        </div>
+        <div class="image-container" onclick="toggleSelection(this)">
+            <img src="./images/machine-learning-14.png" alt="Image 2">
+        </div>
+        <div class="image-container" onclick="toggleSelection(this)">
+            <img src="./images/machine-learning-15.png" alt="Image 3">
+        </div>
+    </div>
+
+    <p>For added security, please type the following sentence in the textbox below and click "Continue"</p>
+    <p>a student of machine learning is clearly related to computational statistics</p>
+
+    <textarea type="text" name="reg-text-input" id="reg-text-input"  rows="4" 
+    cols="50" onkeyup="keyUpFunc(event)"
+        onkeydown="keyDownFunc(event)" placeholder="Type text here">
+        </textarea>
+    <div><button onclick="process()">Continue</button></div>
+    <a href="login.html">Go to login page</a>
+
+    <script>
+        const selectedImages = [];
+
+        function toggleSelection(element) {
+            element.classList.toggle("selected");
+
+            const imageUrl = element.querySelector('img').src;
+
+            if (selectedImages.includes(imageUrl)) {
+                selectedImages = selectedImages.filter(item => item !== imageUrl);
+            } else {
+                selectedImages.push(imageUrl);
+            }
+
+            if (selectedImages.length == 4){
+                document.getElementById("image-select").textContent = "You have selected 4 images, now type the text below and click continue.";
+                document.getElementById("image-select").style.color = "green";
+
+            }
+            if (selectedImages.length > 4) {
+                // const removedImage = selectedImages.shift();
+                // const parsedUrl = new URL(removedImage);
+                // const pathname = parsedUrl.pathname;
+
+                // const filename = pathname.split('/').pop();
+
+                // const removedContainer = document.querySelector('img[src="./images/' + filename + '"]').parentNode;
+                // console.log(removedContainer);
+                // removedContainer.classList.remove("selected");
+                alert('You can\'t select more than 4 image. If sequence is wrong then refresh the page')
+            }
+
+            console.log(selectedImages); 
+        }
+    </script>
+    <script src="free-text-new.js"></script>
+  
+
+</body>
+
+</html>

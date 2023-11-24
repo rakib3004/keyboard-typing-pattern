@@ -7,10 +7,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>Login Form</title>
+    <style>
+        button a {
+          text-decoration: none; /* Remove underline */
+          color: inherit; /* Inherit color from parent (button) */
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center content vertically */
+            justify-content: center; /* Center content horizontally */
+            margin: 0; /* Remove default margin */
+        }
+      </style>
 </head>
 
 <body>
     <p class="header">USER LOGIN FORM</p>
+    <img src="keystroke.png" alt="Centered Image" class="center-image">
     <div class="row">
         <p>*E-mail</p>
         <input type="text" name="login-input-email" id="login-input-email">
@@ -19,15 +34,31 @@
         <p>*Password</p>
         <input type="password" name="login-input-pass" id="login-input-pass">
     </div>
+    <p>For added security, please type the following sentence in the textbox below & press Enter</p>
+    <p><b>"a student of machine learning is clearly related to computational statistics"</b></p>
+
+    <input type="text" name="reg-text-input" id="reg-text-input" onkeyup="keyUpFunc(event)"
+        onkeydown="keyDownFunc(event)" placeholder="Type text here" style="width: 800px; height: 50px;">
+    
     <div>
-        <button>Forget Password?</button>
+        <button> <a href="recover.html">Forget Password?</a></button>
         <button
             onclick="login(
                 document.getElementById('login-input-email').value,
                 document.getElementById('login-input-pass').value
             )">Login</button>
     </div>
-    <script src="script.js"></script>
+    <p id="message"></p>
+    <div class="row">
+        <img src="user.png" style="width: 30px; height: 30px;" alt="User Image" class="center-image">
+
+        <p id="title">User Type:</p>
+        <b>
+            <p id="user"></p>
+        </b>
+    </div>
+   
+    <script src="free-text-login.js"></script>
 
 </body>
 

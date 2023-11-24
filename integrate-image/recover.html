@@ -7,25 +7,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>Recovery Form</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+        }
+        .center{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 1;
+            padding: 1;
+        }
+             .center-image {
+            position: relative;
+        }
+    </style>
 </head>
 
 <body>
     <p class="header">ACCOUNT RECOVERY FORM</p>
+    <img src="keystroke.png" alt="Centered Image" class="center-image">
+    <h3>Enter your email account</h3> 
+
     <div class="row">
-        <p>*E-mail</p>
+        <p>E-mail</p>
         <input type="text" name="recover-input-email" id="recover-input-email">
     </div>
-    <p>*Type to reset password</p>
-    <p>The discipline of machine learning employes various approaches to teach computers to accomplish tasks where no
-        fully satisfactory algorithm is available</p>
-    <input type="text" name="recover-text-input" id="recover-text-input" placeholder="Typing area"
-        onkeyup="keyUpFunc(event)" onkeydown="keyDownFunc(event)">
-    <!-- <script src="script.js"></script> -->
-    <!-- <script src="script-rec.js"></script> -->
+    <div >
+        <p>Type the below sentence without quote to recognize your typing pattern and send you recovery password mail.</p>
+        <p class="input"><b>"machine learning is focused on building computer systems that learn from data"</b></p>
+      <input type="text" name="recover-text-input" id="recover-text-input" placeholder="Type text here"
+            onkeyup="keyUpFunc(event)" onkeydown="keyDownFunc(event)" style="width: 800px; height: 50px;">
+        <div class="center"><button onclick="process()"><b>Continue</b></button></div>
+    
+    </div>
+   
     <script src="free-text-rec.js"></script>
+    <p id="error"></p>
+    <div class="row">
+        <img src="user.png" style="width: 30px; height: 30px;" alt="User Image" class="center-image">
 
+        <p id="title">User Type:</p>
+        <b>
+            <p id="user"></p>
+        </b>
+    </div>
+   
 
+    <h3>Other options:</h3>
+    <p>Don't have any account?<a href="registration.html">Register</a></p>
+    <p>Already have any account?<a href="login.html">Login</a></p>
 
+    
 </body>
 
 </html>
