@@ -113,14 +113,10 @@
     <a href="login.html">Go to login page</a>
 
     <script>
-        const selectedImages = [];
-        
+        const selectedImages = [];  
         function toggleSelection(element) {
 
-         
             element.classList.toggle("selected");
-
-
 
             const imageUrl = element.querySelector('img').src;
 
@@ -141,7 +137,6 @@
                 // const removedImage = selectedImages.shift();
                 // const parsedUrl = new URL(removedImage);
                 // const pathname = parsedUrl.pathname;
-
                 // const filename = pathname.split('/').pop();
 
                 // const removedContainer = document.querySelector('img[src="./images/' + filename + '"]').parentNode;
