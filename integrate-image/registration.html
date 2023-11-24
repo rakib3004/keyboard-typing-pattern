@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Registration Form</title>
+</head>
+
+<body>
+    <p class="header">USER REGISTRATION FORM</p>
+    <p>* Required</p>
+    <div class="row">
+        <p>*E-mail</p>
+        <input type="text" name="reg-input-email" id="reg-input-email">
+    </div>
+    <div class="row">
+        <p>*Password</p>
+        <input type="password" name="reg-input-pass" id="reg-input-pass">
+    </div>
+    <div class="row">
+        <p>*Confirm Password</p>
+        <input type="password" name="reg-input-cpass" id="reg-input-cpass">
+    </div>
+    <p>For added security, please type the following sentence in the textbox below and click "Continue"</p>
+    <p>.tieRoanl</p>
+    <textarea type="text" name="reg-text-input" id="reg-text-input"  rows="4" 
+    cols="50" onkeyup="keyUpFunc(event)"
+        onkeydown="keyDownFunc(event)" placeholder="Type text here">
+        </textarea>
+    <div><button onclick="process()">Continue</button></div>
+    <a href="login.html">Go to login page</a>
+    <script src="free-text-new.js"></script>
+  
+
+</body>
+
+</html>
