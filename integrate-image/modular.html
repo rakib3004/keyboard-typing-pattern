@@ -43,15 +43,7 @@
         <p>*E-mail</p>
         <input type="text" name="reg-input-email" id="reg-input-email">
     </div>
-    <!-- <div class="row">
-        <p>*Password</p>
-        <input type="password" name="reg-input-pass" id="reg-input-pass">
-    </div>
-    <div class="row">
-        <p>*Confirm Password</p>
-        <input type="password" name="reg-input-cpass" id="reg-input-cpass">
-    </div> -->
-
+   
     <p>Select images (minimum 4) for graphical password.</p>
     <p id="image-select"></p>
     <div id="imageGrid">
@@ -130,7 +122,7 @@
             }
 
             if (selectedImages.length == 4){
-                document.getElementById("image-select").textContent = "You have selected 4 images, now type the text below and click continue.";
+                document.getElementById("image-select").textContent = "Type the word below and click continue.";
                 document.getElementById("image-select").style.color = "green";
             }
          

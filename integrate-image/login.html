@@ -45,10 +45,7 @@
       <p>*E-mail</p>
       <input type="text" name="login-input-email" id="login-input-email" />
     </div>
-    <!-- <div class="row">
-      <p>*Password</p>
-      <input type="password" name="login-input-pass" id="login-input-pass" />
-    </div> -->
+
 
     <p>Provide your graphical password</p>
     <p id="image-select"></p>
@@ -102,26 +99,6 @@
         <img src="./images/machine-learning-16.png" alt="Image 3" />
       </div>
     </div>
-    <!-- <p>
-      For added security, please type the following sentence in the textbox
-      below & press Enter
-    </p>
-    <p>
-      <b
-        >"a student of machine learning is clearly related to computational
-        statistics"</b
-      >
-    </p>
-
-    <input
-      type="text"
-      name="reg-text-input"
-      id="reg-text-input"
-      onkeyup="keyUpFunc(event)"
-      onkeydown="keyDownFunc(event)"
-      placeholder="Type text here"
-      style="width: 800px; height: 50px"
-    /> -->
 
     <div>
       <br>
@@ -164,13 +141,13 @@
         }
 
         if (selectedImages.length == 4) {
-            document.getElementById("image-select").textContent =
-              "Correct Graphical Password.";
-            document.getElementById("image-select").style.color = "green";
+            // document.getElementById("image-select").textContent =
+            //   "Correct Graphical Password.";
+            // document.getElementById("image-select").style.color = "green";
 
-          // document.getElementById("image-select").textContent =
-          //   "Incorrect graphical password";
-          // document.getElementById("image-select").style.color = "red";
+          document.getElementById("image-select").textContent =
+            "Incorrect graphical password";
+          document.getElementById("image-select").style.color = "red";
         }
 
     
